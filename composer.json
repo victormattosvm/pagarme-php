@@ -1,5 +1,5 @@
 {
-  "name": "victormattosvm/pagarme-php",
+  "name": "pagarme/pagarme-php",
   "description": "Pagar.Me PHP Library. Forked from pagarme/pagarme-php",
   "type": "lib",
   "keywords": [
