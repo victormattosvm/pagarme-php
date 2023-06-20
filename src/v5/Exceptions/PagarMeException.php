@@ -37,7 +37,7 @@ final class PagarMeException extends \Exception
 		$errorsMessage = '';
 
 		foreach($this->errors as $errorPath => $errorMessage ){
-			$errors .= "{$errorPath}: {$errorMessage}\n";
+			$errorsMessage .= sprintf("[%s]: %s\n", $errorPath, implode( "\n" , $errorMessage ) );
 		}
 		
 		return $errorsMessage;
