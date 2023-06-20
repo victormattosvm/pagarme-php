@@ -12,7 +12,7 @@ use PagarMe\v5\Endpoints\Recipients;
 use PagarMe\v5\Exceptions\PagarMeException;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException as ClientException;
-use PagarMe\Exceptions\InvalidJsonException;
+use PagarMe\v5\Exceptions\InvalidJsonException;
 
 class Client
 {
@@ -179,6 +179,14 @@ class Client
     public function orders(): Orders
     {
         return $this->orders;
+    }
+
+	 /**
+     * @return Orders
+     */
+    public function recipients(): Orders
+    {
+        return $this->recipients;
     }
 
     /**

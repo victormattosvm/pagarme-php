@@ -3,8 +3,8 @@
 namespace PagarMe\v5;
 
 use GuzzleHttp\Exception\ClientException;
-use PagarMe\Exceptions\PagarMeException;
-use PagarMe\Exceptions\InvalidJsonException;
+use PagarMe\v5\Exceptions\PagarMeException;
+use PagarMe\v5\Exceptions\InvalidJsonException;
 
 class ResponseHandler
 {
@@ -16,7 +16,7 @@ class ResponseHandler
      */
     public static function success($payload)
     {
-        return self::toJson($payload);
+        return self::toArray($payload);
     }
 
     /**
