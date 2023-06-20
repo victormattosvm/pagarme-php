@@ -184,7 +184,7 @@ class Client
 	 /**
      * @return Orders
      */
-    public function recipients(): Orders
+    public function recipients(): Recipients
     {
         return $this->recipients;
     }

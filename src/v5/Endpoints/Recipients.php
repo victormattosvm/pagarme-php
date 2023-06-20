@@ -2,8 +2,8 @@
 
 namespace PagarMe\v5\Endpoints;
 
-use PagarMe\Client;
-use PagarMe\Routes;
+use PagarMe\v5\Client;
+use PagarMe\v5\Routes;
 
 class Recipients extends Endpoint
 {
