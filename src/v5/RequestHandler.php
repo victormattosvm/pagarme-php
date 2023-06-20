@@ -12,7 +12,7 @@ class RequestHandler
      */
      public static function bindAuthToHeader(array $options, $secretKey)
     {
-        $options['Authorization'] = base64_encode($secretKey . ':');
+        $options['auth'] = array( $secretKey, '' );
         return $options;
     }
 }

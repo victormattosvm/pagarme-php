@@ -8,7 +8,8 @@ use PagarMe\v5\Endpoints\Charges;
 use PagarMe\v5\Endpoints\Customers;
 use PagarMe\v5\Endpoints\OrderItems;
 use PagarMe\v5\Endpoints\Orders;
-use PagarMe\Exceptions\PagarMeException;
+use PagarMe\v5\Endpoints\Recipients;
+use PagarMe\v5\Exceptions\PagarMeException;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException as ClientException;
 use PagarMe\Exceptions\InvalidJsonException;
@@ -71,12 +72,17 @@ class Client
     private Cards $cards;
 
     /**
+     * @var Recipients
+     */
+    private Recipients $recipients;
+
+    /**
      * @param string $apiKey
      * @param array|null $extras
      */
-    public function __construct(string $apiKey, array $extras = null)
+    public function __construct(string $secretKey, array $extras = null)
     {
-        $this->apiKey = $apiKey;
+        $this->secretKey = $secretKey;
 
         $options = ['base_uri' => self::BASE_URI];
 
@@ -97,6 +103,7 @@ class Client
         $this->customers = new Customers($this);
         $this->addresses = new Addresses($this);
         $this->cards = new Cards($this);
+        $this->recipients = new Recipients($this);
     }
 
     /**
