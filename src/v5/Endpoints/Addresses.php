@@ -1,6 +1,6 @@
 <?php
 
-namespace PagarMe\Endpoints;
+namespace PagarMe\v5\Endpoints;
 
 use PagarMe\Exceptions\PagarMeException;
 use PagarMe\Routes;

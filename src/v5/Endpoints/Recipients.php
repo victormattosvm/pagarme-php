@@ -1,10 +1,9 @@
 <?php
 
-namespace PagarMe\Endpoints;
+namespace PagarMe\v5\Endpoints;
 
 use PagarMe\Client;
 use PagarMe\Routes;
-use PagarMe\Endpoints\Endpoint;
 
 class Recipients extends Endpoint
 {
