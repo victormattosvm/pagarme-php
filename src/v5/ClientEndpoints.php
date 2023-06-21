@@ -9,6 +9,7 @@ use PagarMe\v5\Endpoints\Customers;
 use PagarMe\v5\Endpoints\OrderItems;
 use PagarMe\v5\Endpoints\Orders;
 use PagarMe\v5\Endpoints\Recipients;
+use PagarMe\v5\Endpoints\Withdrawals;
 
 class ClientEndpoints
 {
