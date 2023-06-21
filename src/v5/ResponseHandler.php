@@ -53,8 +53,8 @@ class ResponseHandler
 
 		return new PagarMeException(
             $responseAsArray['message'],
+            $responseAsArray['errors'],
 			$response->getStatusCode(),
-            $responseAsArray['errors']
         );
     }
 
