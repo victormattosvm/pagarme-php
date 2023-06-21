@@ -40,7 +40,7 @@ class Client extends ClientEndpoints
      */
     public function __construct(string $secretKey, array $extras = null)
     {
-		parent::construct();
+		parent::__construct();
 
         $this->secretKey = $secretKey;
 
