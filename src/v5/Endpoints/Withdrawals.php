@@ -12,11 +12,11 @@ class Withdrawals extends Endpoint
      *
      * @return \ArrayObject
      */
-    public function create(array $payload)
+    public function create($recipientId, array $payload)
     {
         return $this->client->request(
             self::POST,
-            Routes::withdrawals()->base($payload['recipient_id']),
+            Routes::withdrawals()->base($recipientId, $payload),
             ['json' => $payload]
         );
     }
@@ -26,11 +26,11 @@ class Withdrawals extends Endpoint
      *
      * @return \ArrayObject
      */
-    public function getList(array $payload = null)
+    public function getList($recipientId, array $payload = null)
     {
         return $this->client->request(
             self::GET,
-            Routes::withdrawals()->base($payload['recipient_id']),
+            Routes::withdrawals()->base($recipientId),
             ['query' => $payload]
         );
     }
@@ -40,11 +40,11 @@ class Withdrawals extends Endpoint
      *
      * @return \ArrayObject
      */
-    public function get(array $payload)
+    public function get($recipientId, array $payload)
     {
         return $this->client->request(
             self::GET,
-            Routes::withdrawals()->details($payload['recipient_id'], $payload['id'])
+            Routes::withdrawals()->details($recipientId, $payload['id'])
         );
     }
 }
