@@ -10,7 +10,7 @@ use PagarMe\v5\Endpoints\OrderItems;
 use PagarMe\v5\Endpoints\Orders;
 use PagarMe\v5\Endpoints\Recipients;
 
-class Client_Endpoints
+class ClientEndpoints
 {
     /**
      * @var Orders

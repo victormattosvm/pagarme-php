@@ -7,7 +7,7 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException as ClientException;
 use PagarMe\v5\Exceptions\InvalidJsonException;
 
-class Client extends Client_Endpoints
+class Client extends ClientEndpoints
 {
     /**
      * @var string
