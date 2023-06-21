@@ -50,6 +50,7 @@ class ResponseHandler
         } catch (InvalidJsonException $invalidJson) {
             $responseAsArray = [];
         }
+		
 
 		return new PagarMeException(
             $responseAsArray['message'],

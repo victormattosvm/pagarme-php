@@ -204,4 +204,22 @@ class Routes
         
         return $anonymous;
     }
+
+	/**
+     * @return \PagarMe\Anonymous
+     */
+    public static function withdrawals()
+    {
+        $anonymous = new Anonymous();
+
+        $anonymous->base = static function ($recipientId) {
+            return "recipients/$recipientId/withdrawals";
+        };
+
+        $anonymous->details = static function ($recipientId, $id) {
+            return "recipients/$recipientId/withdrawals/$id";
+        };
+
+        return $anonymous;
+    }
 }
