@@ -222,4 +222,18 @@ class Routes
 
         return $anonymous;
     }
+
+     /**
+     * @return \PagarMe\Anonymous
+     */
+    public static function bankAccounts()
+    {
+        $anonymous = new Anonymous();
+
+        $anonymous->updateBankAccount = static function ($recipientId) {
+            return "recipients/$recipientId/default-bank-account";
+        };
+
+        return $anonymous;
+    }
 }
