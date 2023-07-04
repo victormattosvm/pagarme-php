@@ -2,10 +2,10 @@
 
 namespace PagarMe;
 
-use PagarMe\v5\Exceptions\PagarMeException;
+use PagarMe\Exceptions\PagarMeException;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException as ClientException;
-use PagarMe\v5\Exceptions\InvalidJsonException;
+use PagarMe\Exceptions\InvalidJsonException;
 
 class Client extends ClientEndpoints
 {

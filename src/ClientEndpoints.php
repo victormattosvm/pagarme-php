@@ -2,14 +2,14 @@
 
 namespace PagarMe;
 
-use PagarMe\v5\Endpoints\Addresses;
-use PagarMe\v5\Endpoints\Cards;
-use PagarMe\v5\Endpoints\Charges;
-use PagarMe\v5\Endpoints\Customers;
-use PagarMe\v5\Endpoints\OrderItems;
-use PagarMe\v5\Endpoints\Orders;
-use PagarMe\v5\Endpoints\Recipients;
-use PagarMe\v5\Endpoints\Withdrawals;
+use PagarMe\Endpoints\Addresses;
+use PagarMe\Endpoints\Cards;
+use PagarMe\Endpoints\Charges;
+use PagarMe\Endpoints\Customers;
+use PagarMe\Endpoints\OrderItems;
+use PagarMe\Endpoints\Orders;
+use PagarMe\Endpoints\Recipients;
+use PagarMe\Endpoints\Withdrawals;
 
 class ClientEndpoints
 {

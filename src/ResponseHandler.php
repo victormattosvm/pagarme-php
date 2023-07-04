@@ -3,8 +3,8 @@
 namespace PagarMe;
 
 use GuzzleHttp\Exception\ClientException;
-use PagarMe\v5\Exceptions\PagarMeException;
-use PagarMe\v5\Exceptions\InvalidJsonException;
+use PagarMe\Exceptions\PagarMeException;
+use PagarMe\Exceptions\InvalidJsonException;
 
 class ResponseHandler
 {
