@@ -5,7 +5,7 @@ namespace PagarMe\Endpoints;
 use PagarMe\Exceptions\PagarMeException;
 use PagarMe\Routes;
 
-class Customers extends Endpoint
+class Addresses extends Endpoint
 {
     /**
      * @param array $payload
@@ -17,7 +17,7 @@ class Customers extends Endpoint
     {
         return $this->client->request(
             self::POST,
-            Routes::customers()->base(),
+            Routes::addresses()->base($payload["customer_id"]),
             ['json' => $payload]
         );
     }
@@ -32,7 +32,7 @@ class Customers extends Endpoint
     {
         return $this->client->request(
             self::PUT,
-            Routes::customers()->details($payload['customer_id']),
+            Routes::addresses()->details($payload["customer_id"], $payload["address_id"]),
             ['json' => $payload]
         );
     }
@@ -47,7 +47,7 @@ class Customers extends Endpoint
     {
         return $this->client->request(
             self::GET,
-            Routes::customers()->base(),
+            Routes::addresses()->base($payload["customer_id"]),
             ['query' => $payload]
         );
     }
@@ -62,7 +62,21 @@ class Customers extends Endpoint
     {
         return $this->client->request(
             self::GET,
-            Routes::customers()->details($payload['id'])
+            Routes::addresses()->details($payload["customer_id"], $payload["address_id"])
+        );
+    }
+
+    /**
+     * @param array $payload
+     *
+     * @return array
+     * @throws PagarMeException
+     */
+    public function delete(array $payload): array
+    {
+        return $this->client->request(
+            self::DELETE,
+            Routes::addresses()->delete($payload["customer_id"], $payload["address_id"])
         );
     }
 }

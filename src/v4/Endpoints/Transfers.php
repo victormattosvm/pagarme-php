@@ -1,11 +1,12 @@
 <?php
 
-namespace PagarMe\Endpoints;
+namespace PagarMe\v4\Endpoints;
 
-use PagarMe\Client;
-use PagarMe\Routes;
+use PagarMe\v4\Client;
+use PagarMe\v4\Routes;
+use PagarMe\v4\Endpoints\Endpoint;
 
-class Recipients extends Endpoint
+class Transfers extends Endpoint
 {
     /**
      * @param array $payload
@@ -16,7 +17,7 @@ class Recipients extends Endpoint
     {
         return $this->client->request(
             self::POST,
-            Routes::recipients()->base(),
+            Routes::transfers()->base(),
             ['json' => $payload]
         );
     }
@@ -30,7 +31,7 @@ class Recipients extends Endpoint
     {
         return $this->client->request(
             self::GET,
-            Routes::recipients()->base(),
+            Routes::transfers()->base(),
             ['query' => $payload]
         );
     }
@@ -44,7 +45,7 @@ class Recipients extends Endpoint
     {
         return $this->client->request(
             self::GET,
-            Routes::recipients()->details($payload['id'])
+            Routes::transfers()->details($payload['id'])
         );
     }
 
@@ -53,25 +54,11 @@ class Recipients extends Endpoint
      *
      * @return \ArrayObject
      */
-    public function update(array $payload)
+    public function cancel(array $payload)
     {
         return $this->client->request(
-            self::PUT,
-            Routes::recipients()->details($payload['id']),
-            ['json' => $payload]
-        );
-    }
-
-    /**
-     * @param array $payload
-     *
-     * @return \ArrayObject
-     */
-    public function getBalance(array $payload)
-    {
-        return $this->client->request(
-            self::GET,
-            Routes::recipients()->balance($payload['recipient_id'])
+            self::POST,
+            Routes::transfers()->cancel($payload['id'])
         );
     }
 }

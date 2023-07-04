@@ -7,32 +7,26 @@ final class PagarMeException extends \Exception
     /**
      * @var string
      */
-    private $type;
+    protected $message;
 
     /**
      * @var string
      */
-    private $parameterName;
-
-    /**
-     * @var string
-     */
-    private $errorMessage;
+    private $errors;
 
     /**
      * @param string $type
      * @param string $parameterName
      * @param string $errorMessage
      */
-    public function __construct($type, $parameterName, $errorMessage)
+    public function __construct($message, $errors, $code = 0 )
     {
-        $this->type = $type;
-        $this->parameterName = $parameterName;
-        $this->errorMessage = $errorMessage;
+        $this->message = $message;
+        $this->errors = $errors;
 
         $exceptionMessage = $this->buildExceptionMessage();
 
-        parent::__construct($exceptionMessage);
+        parent::__construct( $message, $code );
     }
 
     /**
@@ -40,27 +34,21 @@ final class PagarMeException extends \Exception
      */
     private function buildExceptionMessage()
     {
-        return sprintf(
-            'ERROR TYPE: %s. PARAMETER: %s. MESSAGE: %s',
-            $this->type,
-            $this->parameterName,
-            $this->errorMessage
-        );
+		$errorsMessage = '';
+
+		foreach($this->errors as $errorPath => $errorMessage ){
+			$errorsMessage .= sprintf("[%s]: %s\n", $errorPath, implode( "\n" , $errorMessage ) );
+		}
+		
+		return $errorsMessage;
     }
 
     /**
      * @return string
      */
-    public function getType()
+    public function getErrors()
     {
-        return $this->type;
+        return $this->errors;
     }
 
-    /**
-     * @return string
-     */
-    public function getParameterName()
-    {
-        return $this->parameterName;
-    }
 }

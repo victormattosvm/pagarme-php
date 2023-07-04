@@ -1,9 +1,10 @@
 <?php
 
-namespace PagarMe\Endpoints;
+namespace PagarMe\v4\Endpoints;
 
-use PagarMe\Client;
-use PagarMe\Routes;
+use PagarMe\v4\Client;
+use PagarMe\v4\Routes;
+use PagarMe\v4\Endpoints\Endpoint;
 
 class Recipients extends Endpoint
 {
@@ -72,6 +73,36 @@ class Recipients extends Endpoint
         return $this->client->request(
             self::GET,
             Routes::recipients()->balance($payload['recipient_id'])
+        );
+    }
+
+    /**
+     * @param array $payload
+     *
+     * @return \ArrayObject
+     */
+    public function listBalanceOperation(array $payload)
+    {
+        return $this->client->request(
+            self::GET,
+            Routes::recipients()->balanceOperations($payload['recipient_id']),
+            ['query' => $payload]
+        );
+    }
+
+    /**
+     * @param array $payload
+     *
+     * @return \ArrayObject
+     */
+    public function getBalanceOperation(array $payload)
+    {
+        return $this->client->request(
+            self::GET,
+            Routes::recipients()->balanceOperation(
+                $payload['recipient_id'],
+                $payload['balance_operation_id']
+            )
         );
     }
 }

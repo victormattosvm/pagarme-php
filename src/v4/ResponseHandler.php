@@ -1,22 +1,22 @@
 <?php
 
-namespace PagarMe;
+namespace PagarMe\v4;
 
 use GuzzleHttp\Exception\ClientException;
-use PagarMe\v5\Exceptions\PagarMeException;
-use PagarMe\v5\Exceptions\InvalidJsonException;
+use PagarMe\v4\Exceptions\PagarMeException;
+use PagarMe\v4\Exceptions\InvalidJsonException;
 
 class ResponseHandler
 {
     /**
      * @param string $payload
      *
-     * @throws \PagarMe\Exceptions\InvalidJsonException
+     * @throws \PagarMe\v4\Exceptions\InvalidJsonException
      * @return \ArrayObject
      */
     public static function success($payload)
     {
-        return self::toArray($payload);
+        return self::toJson($payload);
     }
 
     /**
@@ -45,28 +45,26 @@ class ResponseHandler
 
         $body = $response->getBody()->getContents();
 
-       try {
-            $responseAsArray = self::toArray($body);
+        try {
+            $jsonError = self::toJson($body);
         } catch (InvalidJsonException $invalidJson) {
-            $responseAsArray = [];
+            return $guzzleException;
         }
-		
 
-		return new PagarMeException(
-            $responseAsArray['message'],
-            $responseAsArray['errors'],
-			$response->getStatusCode(),
+        return new PagarMeException(
+            $jsonError->errors[0]->type,
+            $jsonError->errors[0]->parameter_name,
+            $jsonError->errors[0]->message
         );
     }
 
     /**
      * @param string $json
-     * @return array
-     * @throws InvalidJsonException
+     * @return \ArrayObject
      */
-    private static function toArray(string $json): array
+    private static function toJson($json)
     {
-        $result = json_decode($json, true);
+        $result = json_decode($json);
 
         if (json_last_error() != \JSON_ERROR_NONE) {
             throw new InvalidJsonException(json_last_error_msg());

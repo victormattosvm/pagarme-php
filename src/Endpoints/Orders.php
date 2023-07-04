@@ -5,7 +5,7 @@ namespace PagarMe\Endpoints;
 use PagarMe\Exceptions\PagarMeException;
 use PagarMe\Routes;
 
-class Customers extends Endpoint
+class Orders extends Endpoint
 {
     /**
      * @param array $payload
@@ -17,7 +17,7 @@ class Customers extends Endpoint
     {
         return $this->client->request(
             self::POST,
-            Routes::customers()->base(),
+            Routes::orders()->base(),
             ['json' => $payload]
         );
     }
@@ -28,11 +28,11 @@ class Customers extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function update(array $payload): array
+    public function addCharge(array $payload): array
     {
         return $this->client->request(
-            self::PUT,
-            Routes::customers()->details($payload['customer_id']),
+            self::POST,
+            Routes::orders()->addCharge(),
             ['json' => $payload]
         );
     }
@@ -47,7 +47,7 @@ class Customers extends Endpoint
     {
         return $this->client->request(
             self::GET,
-            Routes::customers()->base(),
+            Routes::orders()->base(),
             ['query' => $payload]
         );
     }
@@ -62,7 +62,22 @@ class Customers extends Endpoint
     {
         return $this->client->request(
             self::GET,
-            Routes::customers()->details($payload['id'])
+            Routes::orders()->details($payload['id'])
+        );
+    }
+
+    /**
+     * @param array $payload
+     *
+     * @return array
+     * @throws PagarMeException
+     */
+    public function closed(array $payload): array
+    {
+        return $this->client->request(
+            self::PATCH,
+            Routes::orders()->closed($payload['id']),
+            ['json' => $payload]
         );
     }
 }

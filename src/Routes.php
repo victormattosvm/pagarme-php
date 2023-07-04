@@ -9,90 +9,60 @@ class Routes
     /**
      * @return \PagarMe\Anonymous
      */
-    public static function transactions()
+    public static function orders()
     {
         $anonymous = new Anonymous();
 
         $anonymous->base = static function () {
-            return 'transactions';
+            return "orders";
         };
 
         $anonymous->details = static function ($id) {
-            return "transactions/$id";
+            return "orders/$id";
+        };
+    
+        $anonymous->addCharge = static function () {
+            return "charges";
         };
 
-        $anonymous->capture = static function ($id) {
-            return "transactions/$id/capture";
-        };
-
-        $anonymous->refund = static function ($id) {
-            return "transactions/$id/refund";
-        };
-
-        $anonymous->payables = static function ($id) {
-            return "transactions/$id/payables";
-        };
-
-        $anonymous->payablesDetails = static function ($transactionId, $payableId) {
-            return "transactions/$transactionId/payables/$payableId";
-        };
-
-        $anonymous->operations = static function ($id) {
-            return "transactions/$id/operations";
-        };
-
-        $anonymous->collectPayment = static function ($id) {
-            return "transactions/$id/collect_payment";
-        };
-
-        $anonymous->events = static function ($id) {
-            return "transactions/$id/events";
-        };
-
-        $anonymous->calculateInstallments = static function () {
-            return "transactions/calculate_installments_amount";
+        $anonymous->closed = static function ($id) {
+            return "orders/$id/closed";
         };
 
         return $anonymous;
     }
-
+    
     /**
      * @return \PagarMe\Anonymous
      */
-    public static function customers()
+    public static function orderItems()
     {
         $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'customers';
+        
+        $anonymous->base = static function ($idOrder) {
+            return "orders/$idOrder/items";
         };
-
-        $anonymous->details = static function ($id) {
-            return "customers/$id";
+        
+        $anonymous->details = static function ($idOrder, $idItem) {
+            return "orders/$idOrder/items/$idItem";
         };
-
+    
+        $anonymous->update = static function ($idOrder, $idItem) {
+            return "orders/$idOrder/items/$idItem";
+        };
+    
+        $anonymous->delete = static function ($idOrder, $idItem) {
+            return "orders/$idOrder/items/$idItem";
+        };
+    
+        $anonymous->deleteAll = static function ($idOrder) {
+            return "orders/$idOrder/items";
+        };
+        
         return $anonymous;
     }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function cards()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'cards';
-        };
-
-        $anonymous->details = static function ($id) {
-            return "cards/$id";
-        };
-
-        return $anonymous;
-    }
-
-    /**
+	
+	/**
      * @return \PagarMe\Anonymous
      */
     public static function recipients()
@@ -121,265 +91,147 @@ class Routes
 
         return $anonymous;
     }
+    
 
     /**
+     * @return \PagarMe\Anonymous
+     */
+    public static function customers()
+    {
+        $anonymous = new Anonymous();
+
+        $anonymous->base = static function () {
+            return "customers";
+        };
+
+        $anonymous->details = static function ($id) {
+            return "customers/$id";
+        };
+
+        return $anonymous;
+    }
+    
+    /**
+     * @return \PagarMe\Anonymous
+     */
+    public static function addresses()
+    {
+        $anonymous = new Anonymous();
+        
+        $anonymous->base = static function ($customer_id) {
+            return "customers/$customer_id/addresses";
+        };
+        
+        $anonymous->details = static function ($customer_id, $address_id) {
+            return "customers/$customer_id/addresses/$address_id";
+        };
+    
+        $anonymous->delete = static function ($customer_id, $address_id) {
+            return "customers/$customer_id/addresses/$address_id";
+        };
+        
+        return $anonymous;
+    }
+
+    /**
+     * @return \PagarMe\Anonymous
+     */
+    public static function cards()
+    {
+        $anonymous = new Anonymous();
+
+        $anonymous->base = static function ($id) {
+            return "customers/$id/cards";
+        };
+
+        $anonymous->details = static function ($id, $card_id) {
+            return "customers/$id/cards/$card_id";
+        };
+    
+        $anonymous->delete = static function ($id, $card_id) {
+            return "customers/$id/cards/$card_id";
+        };
+    
+        $anonymous->renew = static function ($id, $card_id) {
+            return "customers/$id/cards/$card_id/renew";
+        };
+
+        return $anonymous;
+    }
+    
+    /**
+     * @return \PagarMe\Anonymous
+     */
+    public static function charges()
+    {
+        $anonymous = new Anonymous();
+        
+        $anonymous->base = static function () {
+            return "charges";
+        };
+        
+        $anonymous->details = static function ($id) {
+            return "charges/$id";
+        };
+    
+        $anonymous->capture = static function ($id) {
+            return "charges/$id/capture";
+        };
+    
+        $anonymous->updateCard = static function ($id) {
+            return "charges/$id/card";
+        };
+    
+        $anonymous->updateBillingDue = static function ($id) {
+            return "charges/$id/due-date";
+        };
+    
+        $anonymous->updatePaymentMethod = static function ($id) {
+            return "charges/$id/payment-method";
+        };
+    
+        $anonymous->holdCharge = static function ($id) {
+            return "charges/$id/retry";
+        };
+    
+        $anonymous->confirmCash = static function ($id) {
+            return "charges/$id/confirm-payment";
+        };
+        
+        $anonymous->cancel = static function ($id) {
+            return "charges/$id";
+        };
+        
+        return $anonymous;
+    }
+
+	/**
+     * @return \PagarMe\Anonymous
+     */
+    public static function withdrawals()
+    {
+        $anonymous = new Anonymous();
+
+        $anonymous->base = static function ($recipientId) {
+            return "recipients/$recipientId/withdrawals";
+        };
+
+        $anonymous->details = static function ($recipientId, $id) {
+            return "recipients/$recipientId/withdrawals/$id";
+        };
+
+        return $anonymous;
+    }
+
+     /**
      * @return \PagarMe\Anonymous
      */
     public static function bankAccounts()
     {
         $anonymous = new Anonymous();
 
-        $anonymous->base = static function () {
-            return 'bank_accounts';
-        };
-
-        $anonymous->details = static function ($id) {
-            return "bank_accounts/$id";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function plans()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'plans';
-        };
-
-        $anonymous->details = static function ($id) {
-            return "plans/$id";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function bulkAnticipations()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function ($recipientId) {
-            return "recipients/$recipientId/bulk_anticipations";
-        };
-
-        $anonymous->limits = static function ($recipientId) {
-            return "recipients/$recipientId/bulk_anticipations/limits";
-        };
-
-        $anonymous->confirm = static function ($recipientId, $bulkAnticipationId) {
-            return "recipients/$recipientId/bulk_anticipations/$bulkAnticipationId/confirm";
-        };
-
-        $anonymous->cancel = static function ($recipientId, $bulkAnticipationId) {
-            return "recipients/$recipientId/bulk_anticipations/$bulkAnticipationId/cancel";
-        };
-
-        $anonymous->delete = static function ($recipientId, $bulkAnticipationId) {
-            return "recipients/$recipientId/bulk_anticipations/$bulkAnticipationId";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function paymentLinks()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'payment_links';
-        };
-
-        $anonymous->details = static function ($paymentLinkId) {
-            return "payment_links/$paymentLinkId";
-        };
-
-        $anonymous->cancel = static function ($paymentLinkId) {
-            return "payment_links/$paymentLinkId/cancel";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function transfers()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'transfers';
-        };
-
-        $anonymous->details = static function ($transferId) {
-            return "transfers/$transferId";
-        };
-
-        $anonymous->cancel = static function ($transferId) {
-            return "transfers/$transferId/cancel";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function subscriptions()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'subscriptions';
-        };
-
-        $anonymous->details = static function ($subscriptionId) {
-            return "subscriptions/$subscriptionId";
-        };
-
-        $anonymous->cancel = static function ($subscriptionId) {
-            return "subscriptions/$subscriptionId/cancel";
-        };
-
-        $anonymous->transactions = static function ($subscriptionId) {
-            return "subscriptions/$subscriptionId/transactions";
-        };
-
-        $anonymous->settleCharges = static function ($subscriptionId) {
-            return "subscriptions/$subscriptionId/settle_charge";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function refunds()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'refunds';
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function postbacks()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function ($model, $modelId) {
-            return "$model/$modelId/postbacks";
-        };
-
-        $anonymous->details = static function (
-            $model,
-            $modelId,
-            $postbackId
-        ) {
-            return "$model/$modelId/postbacks/$postbackId";
-        };
-
-        $anonymous->redeliver = static function (
-            $model,
-            $modelId,
-            $postbackId
-        ) {
-            return "$model/$modelId/postbacks/$postbackId/redeliver";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function balances()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'balance';
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function payables()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'payables';
-        };
-
-        $anonymous->details = static function ($id) {
-            return "payables/$id";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function balanceOperations()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'balance/operations';
-        };
-
-        $anonymous->details = static function ($id) {
-            return "balance/operations/$id";
-        };
-
-        return $anonymous;
-    }
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function chargebacks()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return 'chargebacks';
-        };
-
-        return $anonymous;
-    }
-
-
-    /**
-     * @return \PagarMe\Anonymous
-     */
-    public static function search()
-    {
-        $anonymous = new Anonymous();
-
-        $anonymous->base = static function () {
-            return "search";
+        $anonymous->updateBankAccount = static function ($recipientId) {
+            return "recipients/$recipientId/default-bank-account";
         };
 
         return $anonymous;

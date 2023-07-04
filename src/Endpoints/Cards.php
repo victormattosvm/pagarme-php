@@ -2,22 +2,37 @@
 
 namespace PagarMe\Endpoints;
 
-use PagarMe\Client;
+use PagarMe\Exceptions\PagarMeException;
 use PagarMe\Routes;
-use PagarMe\Endpoints\Endpoint;
 
 class Cards extends Endpoint
 {
     /**
      * @param array $payload
      *
-     * @return \ArrayObject
+     * @return array
+     * @throws PagarMeException
      */
-    public function create(array $payload)
+    public function create(array $payload): array
     {
         return $this->client->request(
             self::POST,
-            Routes::cards()->base(),
+            Routes::cards()->base($payload['customer_id']),
+            ['json' => $payload]
+        );
+    }
+
+    /**
+     * @param array $payload
+     *
+     * @return array
+     * @throws PagarMeException
+     */
+    public function update(array $payload): array
+    {
+        return $this->client->request(
+            self::PUT,
+            Routes::cards()->details($payload['customer_id'], $payload['card_id']),
             ['json' => $payload]
         );
     }
@@ -25,13 +40,14 @@ class Cards extends Endpoint
     /**
      * @param array|null $payload
      *
-     * @return \ArrayObject
+     * @return array
+     * @throws PagarMeException
      */
-    public function getList(array $payload = null)
+    public function getList(array $payload = null): array
     {
         return $this->client->request(
             self::GET,
-            Routes::cards()->base(),
+            Routes::cards()->base($payload['customer_id']),
             ['query' => $payload]
         );
     }
@@ -39,13 +55,28 @@ class Cards extends Endpoint
     /**
      * @param array $payload
      *
-     * @return \ArrayObject
+     * @return array
+     * @throws PagarMeException
      */
-    public function get(array $payload)
+    public function get(array $payload): array
     {
         return $this->client->request(
             self::GET,
-            Routes::cards()->details($payload['id'])
+            Routes::cards()->details($payload['customer_id'], $payload['card_id'])
+        );
+    }
+
+    /**
+     * @param array $payload
+     *
+     * @return array
+     * @throws PagarMeException
+     */
+    public function delete(array $payload): array
+    {
+        return $this->client->request(
+            self::DELETE,
+            Routes::cards()->delete($payload['customer_id'], $payload['card_id'])
         );
     }
 }

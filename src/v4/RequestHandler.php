@@ -1,6 +1,6 @@
 <?php
 
-namespace PagarMe;
+namespace PagarMe\v4;
 
 class RequestHandler
 {
@@ -10,9 +10,10 @@ class RequestHandler
      *
      * @return array
      */
-     public static function bindAuthToHeader(array $options, $secretKey)
+    public static function bindApiKeyToQueryString(array $options, $apiKey)
     {
-        $options['auth'] = array( $secretKey, '' );
+        $options['query']['api_key'] = $apiKey;
+
         return $options;
     }
 }
