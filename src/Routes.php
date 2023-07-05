@@ -248,7 +248,7 @@ class Routes {
 		$anonymous = new Anonymous();
 
 		$anonymous->updateAnticipationSettings = static function ( $recipientId ) {
-			return "recipients/$recipientId/transfer-settings";
+			return "recipients/$recipientId/automatic-anticipation-settings";
 		};
 
 		return $anonymous;
