@@ -10,126 +10,159 @@ use PagarMe\Endpoints\OrderItems;
 use PagarMe\Endpoints\Orders;
 use PagarMe\Endpoints\Recipients;
 use PagarMe\Endpoints\Withdrawals;
+use PagarMe\Endpoints\BankAccounts;
+use PagarMe\Endpoints\TransferSettings;
+use PagarMe\Endpoints\AnticipationSettings;
 
-class ClientEndpoints
-{
-    /**
-     * @var Orders
-     */
-    private Orders $orders;
-    
-    /**
-     * @var OrderItems
-     */
-    private OrderItems $orderItems;
-    
-    /**
-     * @var Charges
-     */
-    private Charges $charges;
+class ClientEndpoints {
 
-    /**
-     * @var Customers
-     */
-    private Customers $customers;
+	/**
+	 * @var Orders
+	 */
+	private Orders $orders;
 
-    /**
-     * @var Addresses
-     */
-    private Addresses $addresses;
+	/**
+	 * @var OrderItems
+	 */
+	private OrderItems $orderItems;
 
-    /**
-     * @var Cards
-     */
-    private Cards $cards;
+	/**
+	 * @var Charges
+	 */
+	private Charges $charges;
 
-    /**
-     * @var Recipients
-     */
-    private Recipients $recipients;
+	/**
+	 * @var Customers
+	 */
+	private Customers $customers;
 
-    /**
-     * @var Withdrawals
-     */
-    private Withdrawals $withdrawals;
+	/**
+	 * @var Addresses
+	 */
+	private Addresses $addresses;
 
-    /**
-     * @param string $apiKey
-     * @param array|null $extras
-     */
-    public function __construct()
-    {
-        $this->orders = new Orders($this);
-        $this->orderItems = new OrderItems($this);
-        $this->charges = new Charges($this);
-        $this->customers = new Customers($this);
-        $this->addresses = new Addresses($this);
-        $this->cards = new Cards($this);
-        $this->recipients = new Recipients($this);
-        $this->withdrawals = new Withdrawals($this);
-    }
-	
-    /**
-     * @return Orders
-     */
-    public function orders(): Orders
-    {
-        return $this->orders;
-    }
+	/**
+	 * @var Cards
+	 */
+	private Cards $cards;
+
+	/**
+	 * @var Recipients
+	 */
+	private Recipients $recipients;
+
+	/**
+	 * @var Withdrawals
+	 */
+	private Withdrawals $withdrawals;
 
 	 /**
-     * @return Orders
-     */
-    public function recipients(): Recipients
-    {
-        return $this->recipients;
-    }
-
-    /**
-     * @return OrderItems
-     */
-    public function orderItems(): OrderItems
-    {
-        return $this->orderItems;
-    }
-
-    /**
-     * @return Charges
-     */
-    public function charges(): Charges
-    {
-        return $this->charges;
-    }
-
-    /**
-     * @return Customers
-     */
-    public function customers(): Customers
-    {
-        return $this->customers;
-    }
-
-    /**
-     * @return Addresses
-     */
-    public function addresses(): Addresses
-    {
-        return $this->addresses;
-    }
-
-    /**
-     * @return Cards
-     */
-    public function cards(): Cards
-    {
-        return $this->cards;
-    }
+	  * @var BankAccounts
+	  */
+	private BankAccounts $bankAccounts;
 
 	 /**
-     * @return Withdrawals
-     */
-    public function withdrawals(): Withdrawals
-    {
-        return $this->withdrawals;
-    }
+	  * @var TransferSettings
+	  */
+	private TransferSettings $transferSettings;
+
+	/**
+	 * @var AnticipationSettings
+	 */
+	private AnticipationSettings $anticipationSettings;
+
+	/**
+	 * @param string     $apiKey
+	 * @param array|null $extras
+	 */
+	public function __construct() {
+		$this->orders               = new Orders( $this );
+		$this->orderItems           = new OrderItems( $this );
+		$this->charges              = new Charges( $this );
+		$this->customers            = new Customers( $this );
+		$this->addresses            = new Addresses( $this );
+		$this->cards                = new Cards( $this );
+		$this->recipients           = new Recipients( $this );
+		$this->withdrawals          = new Withdrawals( $this );
+		$this->bankAccounts         = new BankAccounts( $this );
+		$this->transferSettings     = new TransferSettings( $this );
+		$this->anticipationSettings = new AnticipationSettings( $this );
+	}
+
+	/**
+	 * @return Orders
+	 */
+	public function orders(): Orders {
+		return $this->orders;
+	}
+
+	 /**
+	  * @return Orders
+	  */
+	public function recipients(): Recipients {
+		return $this->recipients;
+	}
+
+	/**
+	 * @return OrderItems
+	 */
+	public function orderItems(): OrderItems {
+		return $this->orderItems;
+	}
+
+	/**
+	 * @return Charges
+	 */
+	public function charges(): Charges {
+		return $this->charges;
+	}
+
+	/**
+	 * @return Customers
+	 */
+	public function customers(): Customers {
+		return $this->customers;
+	}
+
+	/**
+	 * @return Addresses
+	 */
+	public function addresses(): Addresses {
+		return $this->addresses;
+	}
+
+	/**
+	 * @return Cards
+	 */
+	public function cards(): Cards {
+		return $this->cards;
+	}
+
+	 /**
+	  * @return Withdrawals
+	  */
+	public function withdrawals(): Withdrawals {
+		return $this->withdrawals;
+	}
+
+	 /**
+	  * @return BankAccounts
+	  */
+	public function bankAccounts(): BankAccounts {
+		return $this->bankAccounts;
+	}
+
+	/**
+	 * @return TransferSettings
+	 */
+	public function transferSettings(): TransferSettings {
+		return $this->transferSettings;
+	}
+
+	/**
+	 * @return AnticipationSettings
+	 */
+	public function anticipationSettings(): AnticipationSettings {
+		return $this->anticipationSettings;
+	}
 }
