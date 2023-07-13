@@ -13,11 +13,11 @@ class Charges extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function capture(array $payload): array
+    public function capture(string $chargeId, array $payload): array
     {
         return $this->client->request(
             self::POST,
-            Routes::charges()->capture($payload['charge_id']),
+            Routes::charges()->capture($chargeId),
             ['json' => $payload]
         );
     }
@@ -28,11 +28,11 @@ class Charges extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function updateCard(array $payload): array
+    public function updateCard(string $chargeId, array $payload): array
     {
         return $this->client->request(
             self::PUT,
-            Routes::charges()->updateCard($payload['charge_id']),
+            Routes::charges()->updateCard($chargeId),
             ['json' => $payload]
         );
     }
@@ -43,11 +43,11 @@ class Charges extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function updateBillingDue(array $payload): array
+    public function updateBillingDue(string $chargeId, array $payload): array
     {
         return $this->client->request(
             self::PUT,
-            Routes::charges()->updateBillingDue($payload['charge_id']),
+            Routes::charges()->updateBillingDue($chargeId),
             ['json' => $payload]
         );
     }
@@ -58,11 +58,11 @@ class Charges extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function updatePaymentMethod(array $payload): array
+    public function updatePaymentMethod(string $chargeId, array $payload): array
     {
         return $this->client->request(
             self::PUT,
-            Routes::charges()->updatePaymentMethod($payload['charge_id']),
+            Routes::charges()->updatePaymentMethod($chargeId),
             ['json' => $payload]
         );
     }
@@ -88,11 +88,11 @@ class Charges extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function get(array $payload): array
+    public function get(string $chargeId): array
     {
         return $this->client->request(
             self::GET,
-            Routes::charges()->details($payload['id'])
+            Routes::charges()->details($chargeId)
         );
     }
 
@@ -102,11 +102,11 @@ class Charges extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function confirmCash(array $payload): array
+    public function confirmCash(string $chargeId, array $payload): array
     {
         return $this->client->request(
             self::POST,
-            Routes::charges()->confirmCash($payload['charge_id']),
+            Routes::charges()->confirmCash($chargeId),
             ['json' => $payload]
         );
     }
@@ -117,11 +117,11 @@ class Charges extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function holdCharge(array $payload): array
+    public function holdCharge(string $chargeId): array
     {
         return $this->client->request(
             self::POST,
-            Routes::charges()->holdCharge($payload['id'])
+            Routes::charges()->holdCharge($chargeId)
         );
     }
 
@@ -131,11 +131,11 @@ class Charges extends Endpoint
      * @return array
      * @throws PagarMeException
      */
-    public function cancel(array $payload): array
+    public function cancel(string $chargeId, array $payload): array
     {
         return $this->client->request(
             self::DELETE,
-            Routes::charges()->cancel($payload['charge_id']),
+            Routes::charges()->cancel($chargeId),
             ['json' => $payload]
         );
     }
