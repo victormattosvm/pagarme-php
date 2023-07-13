@@ -31,7 +31,7 @@ class Charges extends Endpoint
     public function updateCard(array $payload): array
     {
         return $this->client->request(
-            self::PATCH,
+            self::PUT,
             Routes::charges()->updateCard($payload['charge_id']),
             ['json' => $payload]
         );
@@ -46,7 +46,7 @@ class Charges extends Endpoint
     public function updateBillingDue(array $payload): array
     {
         return $this->client->request(
-            self::PATCH,
+            self::PUT,
             Routes::charges()->updateBillingDue($payload['charge_id']),
             ['json' => $payload]
         );
@@ -61,7 +61,7 @@ class Charges extends Endpoint
     public function updatePaymentMethod(array $payload): array
     {
         return $this->client->request(
-            self::PATCH,
+            self::PUT,
             Routes::charges()->updatePaymentMethod($payload['charge_id']),
             ['json' => $payload]
         );
