@@ -78,12 +78,20 @@ class Routes {
 			return "recipients/$id/balance";
 		};
 
-		$anonymous->balanceOperations = static function ( $id ) {
-			return "recipients/$id/balance/operations";
+		// $anonymous->balanceOperations = static function ( $id ) {
+			// return "recipients/$id/balance/operations";
+		// };
+
+		// $anonymous->balanceOperation = static function ( $recipientId, $balanceOperationId ) {
+			// return "recipients/$recipientId/balance/operations/$balanceOperationId";
+		// };
+
+		$anonymous->balanceOperations = static function () {
+			return 'balance/operations';
 		};
 
-		$anonymous->balanceOperation = static function ( $recipientId, $balanceOperationId ) {
-			return "recipients/$recipientId/balance/operations/$balanceOperationId";
+		$anonymous->balanceOperation = static function ( $balance_operation_id ) {
+			return "balance/operations/$balance_operation_id";
 		};
 
 		return $anonymous;
@@ -249,6 +257,23 @@ class Routes {
 
 		$anonymous->updateAnticipationSettings = static function ( $recipientId ) {
 			return "recipients/$recipientId/automatic-anticipation-settings";
+		};
+
+		return $anonymous;
+	}
+
+	/**
+	 * @return \PagarMe\Anonymous
+	 */
+	public static function payables() {
+		$anonymous = new Anonymous();
+
+		$anonymous->base = static function ( $params ) {
+			return 'payables';
+		};
+
+		$anonymous->details = static function ( $payable_id, $params ) {
+			return "payables/$payable_id";
 		};
 
 		return $anonymous;
