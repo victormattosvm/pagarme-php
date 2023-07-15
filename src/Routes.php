@@ -90,8 +90,8 @@ class Routes {
 			return 'balance/operations';
 		};
 
-		$anonymous->balanceOperation = static function ( $balance_operation_id ) {
-			return "balance/operations/$balance_operation_id";
+		$anonymous->balanceOperation = static function ( $balanceOperationId ) {
+			return "balance/operations/$balanceOperationId";
 		};
 
 		return $anonymous;
@@ -272,8 +272,8 @@ class Routes {
 			return 'payables';
 		};
 
-		$anonymous->details = static function ( $payable_id, $params ) {
-			return "payables/$payable_id";
+		$anonymous->details = static function ( $payableId, $params ) {
+			return "payables/$payableId";
 		};
 
 		return $anonymous;

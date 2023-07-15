@@ -88,10 +88,10 @@ class Recipients extends Endpoint {
 	 *
 	 * @return \ArrayObject
 	 */
-	public function getBalanceOperation( $balance_operation_id, array $payload ) {
+	public function getBalanceOperation( $balanceOperationId, array $payload ) {
 		return $this->client->request(
 			self::GET,
-			Routes::recipients()->balanceOperation( $balance_operation_id ),
+			Routes::recipients()->balanceOperation( $balanceOperationId ),
 			array( 'json' => $payload )
 		);
 	}
@@ -114,10 +114,10 @@ class Recipients extends Endpoint {
 	 *
 	 * @return \ArrayObject
 	 */
-	public function getPayable( $payable_id, array $payload ) {
+	public function getPayable( $payableId, array $payload ) {
 		return $this->client->request(
 			self::GET,
-			Routes::payables()->details( $payable_id ),
+			Routes::payables()->details( $payableId ),
 			array( 'json' => $payload )
 		);
 	}
