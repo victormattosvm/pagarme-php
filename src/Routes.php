@@ -268,7 +268,7 @@ class Routes {
 	public static function payables() {
 		$anonymous = new Anonymous();
 
-		$anonymous->base = static function ( $params ) {
+		$anonymous->base = static function () {
 			return 'payables';
 		};
 

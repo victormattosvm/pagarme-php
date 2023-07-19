@@ -165,4 +165,11 @@ class ClientEndpoints {
 	public function anticipationSettings(): AnticipationSettings {
 		return $this->anticipationSettings;
 	}
+
+	/**
+	 * @return Payables
+	 */
+	public function payables(): Payables {
+		return $this->payables;
+	}
 }
