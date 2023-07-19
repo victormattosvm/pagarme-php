@@ -105,7 +105,7 @@ class Recipients extends Endpoint {
 		return $this->client->request(
 			self::GET,
 			Routes::payables()->base(),
-			array( 'json' => $payload )
+			array( 'query' => $payload )
 		);
 	}
 
