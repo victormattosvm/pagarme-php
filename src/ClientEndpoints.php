@@ -13,6 +13,9 @@ use PagarMe\Endpoints\Withdrawals;
 use PagarMe\Endpoints\BankAccounts;
 use PagarMe\Endpoints\TransferSettings;
 use PagarMe\Endpoints\AnticipationSettings;
+use PagarMe\Endpoints\Balance;
+use PagarMe\Endpoints\BalanceOperations;
+use PagarMe\Endpoints\Payables;
 
 class ClientEndpoints {
 
@@ -52,6 +55,21 @@ class ClientEndpoints {
 	private Recipients $recipients;
 
 	/**
+	 * @var Balance
+	 */
+	private Balance $balance;
+
+	/**
+	 * @var BalanceOperations
+	 */
+	private BalanceOperations $balanceOperations;
+
+	/**
+	 * @var Payables
+	 */
+	private Payables $payables;
+
+	/**
 	 * @var Withdrawals
 	 */
 	private Withdrawals $withdrawals;
@@ -87,6 +105,9 @@ class ClientEndpoints {
 		$this->bankAccounts         = new BankAccounts( $this );
 		$this->transferSettings     = new TransferSettings( $this );
 		$this->anticipationSettings = new AnticipationSettings( $this );
+		$this->balance 				= new Balance( $this );
+		$this->balanceOperations	= new BalanceOperations( $this );
+		$this->payables				= new Payables( $this );
 	}
 
 	/**
@@ -97,7 +118,7 @@ class ClientEndpoints {
 	}
 
 	 /**
-	  * @return Orders
+	  * @return Recipients
 	  */
 	public function recipients(): Recipients {
 		return $this->recipients;
@@ -171,5 +192,19 @@ class ClientEndpoints {
 	 */
 	public function payables(): Payables {
 		return $this->payables;
+	}
+
+	/**
+	 * @return Balance
+	 */
+	public function balance(): Payables {
+		return $this->balance;
+	}
+
+	/**
+	 * @return BalanceOperations
+	 */
+	public function balanceOperations(): BalanceOperations {
+		return $this->balanceOperations;
 	}
 }

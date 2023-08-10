@@ -78,14 +78,6 @@ class Routes {
 			return "recipients/$id/balance";
 		};
 
-		// $anonymous->balanceOperations = static function ( $id ) {
-			// return "recipients/$id/balance/operations";
-		// };
-
-		// $anonymous->balanceOperation = static function ( $recipientId, $balanceOperationId ) {
-			// return "recipients/$recipientId/balance/operations/$balanceOperationId";
-		// };
-
 		$anonymous->balanceOperations = static function () {
 			return 'balance/operations';
 		};
@@ -272,7 +264,7 @@ class Routes {
 			return 'payables';
 		};
 
-		$anonymous->details = static function ( $payableId, $params ) {
+		$anonymous->details = static function ( $payableId ) {
 			return "payables/$payableId";
 		};
 
