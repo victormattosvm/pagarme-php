@@ -16,7 +16,7 @@ class Withdrawals extends Endpoint
     {
         return $this->client->request(
             self::POST,
-            Routes::withdrawals()->base($recipientId, $payload),
+            Routes::withdrawals()->base($recipientId),
             ['json' => $payload]
         );
     }
