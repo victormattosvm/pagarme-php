@@ -197,7 +197,7 @@ class ClientEndpoints {
 	/**
 	 * @return Balance
 	 */
-	public function balance(): Payables {
+	public function balance(): Balance {
 		return $this->balance;
 	}
 
