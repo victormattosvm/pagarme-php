@@ -32,7 +32,7 @@ final class PagarMeException extends \Exception
     /**
      * @return string
      */
-    private function buildExceptionMessage()
+    public function buildExceptionMessage()
     {
 		$errorsMessage = '';
 
