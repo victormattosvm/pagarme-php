@@ -53,30 +53,31 @@ class Orders extends Endpoint
     }
 
     /**
-     * @param array $payload
+     * @param string $orderId
      *
      * @return array
      * @throws PagarMeException
      */
-    public function get(array $payload): array
+    public function get(string $orderId): array
     {
         return $this->client->request(
             self::GET,
-            Routes::orders()->details($payload['id'])
+            Routes::orders()->details($orderId)
         );
     }
 
     /**
+	 * @param string $orderId
      * @param array $payload
      *
      * @return array
      * @throws PagarMeException
      */
-    public function closed(array $payload): array
+    public function closed(string $orderId, array $payload): array
     {
         return $this->client->request(
             self::PATCH,
-            Routes::orders()->closed($payload['id']),
+            Routes::orders()->closed($orderId),
             ['json' => $payload]
         );
     }
