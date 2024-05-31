@@ -270,4 +270,17 @@ class Routes {
 
 		return $anonymous;
 	}
+
+	/**
+	 * @return \PagarMe\Anonymous
+	 */
+	public static function kyc() {
+		$anonymous = new Anonymous();
+
+		$anonymous->getKycLink = static function ( $recipientId ) {
+			return "recipients/$recipient_id/kyc_link";
+		};
+
+		return $anonymous;
+	}
 }
